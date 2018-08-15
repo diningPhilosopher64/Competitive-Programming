@@ -1,0 +1,231 @@
+Quicklist:
+
+
+For binary search in java
+
+Arrays.binarySearch(array,key);
+
+Arrays.sort();
+
+//Check for Arrays.parallelSort();
+
+
+To find min:
+
+Arrays.stream(arr).min()
+
+to find max 
+
+Arrays.stream(arr).max()
+
+to find sum of els of array:
+
+Arrays.stream(arr).sum()
+
+ to find average of els of an array
+
+ Arrays.stream(arr).average();
+
+ if in case the list is empty , then java 8 has an optional feature orElse()
+
+ Arrays.stream(arr).average().orElse(0d);
+
+ Now if we want to make use of all the processors that are available to do above operations:
+ If the size of the array arr is quite small , then using the parallel() will slow down the execution of the program, hence use parallel() only when the size of the array is large
+
+  Arrays.stream(arr).parallel().average().orElse(0d);
+
+ Similarly for others:
+
+ Arrays.stream(arr).parallel().min();  // similar for max
+
+ In a hashmap, using map.containsKey() is slow. Instead we can use map.get(object) and then do the work:
+
+
+ Integer count = map.get(input);   // Here we cant use the primitive int as ,int by default stores 0 and cannot store null.
+ if(count == null) count = 0;
+
+ map.put(input,count+1);
+
+For directly incrementing you cn do something like this :
+ 
+ myMap.put(key, myMap.get(key) + 1)
+
+
+String, Integer all are immutable. if we want to use mutable for Integer we need to use AtomicInteger.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+HashMap doesnt maintain order of insertion into the map.
+
+
+
+int is a primitive type. Variables of type int store the actual binary value for the integer you want to represent. int.parseInt("1") doesn't make sense because int is not a class and therefore doesn't have any methods.
+
+
+
+Integer is a class, no different from any other in the Java language. Variables of type Integer store references to Integer objects, just as with any other reference (object) type. Integer.parseInt("1") is a call to the static method parseInt from class Integer (note that this method actually returns an int and not an Integer).
+
+Note that every primitive type in Java has an equivalent wrapper class:
+
+byte has Byte
+short has Short
+int has Integer
+long has Long
+boolean has Boolean
+char has Character
+float has Float
+double has Double
+
+Wrapper classes inherit from Object class, and primitive don't. So it can be used in collections with Object reference or with Generics.
+
+
+To take space seperated input:
+
+
+BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int n = Integer.parseInt(st.nextToken());
+		int k = Integer.parseInt(st.nextToken());	
+		String str = st.nextToken();
+
+Here first 2 space seperated inputs are numbers hence the conversion , whereas the 3rd one is the direct string.
+
+
+-------------------------------------------------------------------------------------
+
+
+for the variables which do not change very often , mark them as final .
+
+final StringBuilder stringBuilder = new StringBuilder();
+
+Try to avoid object creation in java, even if you create objects it should not be of the order n^2 or even nlogn
+
+Write most of the code in a solver class and in the main class you should just be printing it by creating an object within sysout
+
+
+System.out.println(new Solver().solve(a,b,c,d)) 
+
+This^ should be the way you write code for competitive programming.
+
+For binary search in java
+
+Arrays.binarySearch(array,key);
+
+Arrays.sort();
+
+//Check for Arrays.parallelSort();
+
+
+String str = "abcd";
+
+str.indexOf("b"); 
+
+The above line of code is an n^2 operation and should be used only if absolutely necessary.
+
+int max = Integer.MAX_VALUE
+
+Sets the value to max dd
+
+in Test cases
+@Test
+public void Test1()
+{
+	assertArrayEquals(new int[]{1,2,3,4}, solver.solve(new int[] {4,3,2,1}))
+}
+
+
+JUnit does not allow static methods to be tested meaning main method is static hence we need to seperate out the logic
+in a solver class and then  test by creating objects of the solver class.
+
+
+
+											FAST OUTPUT :
+
+
+
+system.out.println is very slow.
+
+for(int testcases = br.readLine(); testcases > 0 ; testcases--)
+{
+	sysout("answer");
+}
+
+this is slow as we are calling sysout for every iteration.
+
+Instead we can do something that will output only once.
+
+String str = "";
+for(int testcases = br.readLine(); testcases > 0 ; testcases--)
+{
+	str += "answer";
+}
+
+
+sysout(str);
+
+// In java strings are immutable => when we are doing str += "answer" , it is actually creating a new string doing the += operation and then assigning the reference "str" to the newly created object.
+
+
+Now to avoid this :
+
+We need to use StringBuffer or StringBuilder . StringBuffer is implelemented for concurrent input. Which we would not need
+for the purpose competitive programming
+
+We can use StringBuilder in place of Strings.
+So , the above code becomes :
+
+
+StringBuilder stringBuilder = new StringBuilder();
+for(int testcases = br.readLine(); testcases > 0 ; testcases--)
+{
+	stringBuilder.append("answer").append("\n");
+}
+
+// String builder doesnt append the \n character by default as comapared to println. Hence we need to explicitly do that.
+
+
+Now to print out we just use sysout only once.
+
+System.out.println(stringBuilder);
+
+
+	To totally avoid out.println we can do this :
+
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		bw.write(stringBuilder);
+
+
+									MULTIPLE SOLVERS:
+
+
+In this approach , we will have 2 kinds of solutions :
+
+1) the first one is the one which is a bruteforce solver where you know it is going to be correct 
+
+2) the second one is the one which you are going to submit and need some clarity on.
+
+You use the bruteforce solution , which you are quite sure of the answer , to compare it to the actual solution which you are going to submit. It helps in generating a lot of test cases as well as making sure you are getting the right answers by comparing it with the brute force solver.
+
+For example : If you are implementing KMP algorithm in strings , you use the .indexOf() function as the bruteforce solver , and we know that the bruteforce solver, in this case the indexOf is n^2 algorithm . We just use this to cross check the answer which we would get from the kmp algo.
+
+
+
+
