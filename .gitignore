@@ -6,8 +6,10 @@ prep.txt
 toBeSolved/*
 tree.cpp
 CPinJava.odt
+sd.odt
 .~lock.CPinJava.odt#
-
-
+*.swp
+interviewBit/**/*.java.swp
+interviewBit/**/.java.swp
 
 
