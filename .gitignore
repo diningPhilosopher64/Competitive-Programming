@@ -11,5 +11,10 @@ sd.odt
 *.swp
 interviewBit/**/*.java.swp
 interviewBit/**/.java.swp
+links.txt
+prep.txt
+probs.txt
+LeetCode/LeetCodeNotes.odt
+.~lock.LeetCodeNotes.odt#
 
 
